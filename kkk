@@ -1,0 +1,28 @@
+def zigzag_traversal(matrix, N, M):
+    result = []
+    for d in range(N + M - 1):
+        if d % 2 == 0:
+            # Move upward (i decreasing, j increasing)
+            r = min(d, N - 1)
+            c = d - r
+            while r >= 0 and c < M:
+                result.append(matrix[r][c])
+                r -= 1
+                c += 1
+        else:
+            # Move downward (i increasing, j decreasing)
+            c = min(d, M - 1)
+            r = d - c
+            while c >= 0 and r < N:
+                result.append(matrix[r][c])
+                r += 1
+                c -= 1
+    return result
+
+# Input
+N, M = map(int, input().split())
+matrix = [list(map(int, input().split())) for _ in range(N)]
+
+# Output
+output = zigzag_traversal(matrix, N, M)
+print(' '.join(map(str, output)))

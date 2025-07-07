@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Function-Based Calculator</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0f8ff, #e0ffff);
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .calculator {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 350px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        input, select, button {
+            padding: 10px;
+            margin: 10px 5px;
+            width: 80%;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        input, select {
+            background: #f3f3f3;
+        }
+
+        button {
+            background-color: #00bcd4;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0097a7;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <h1> Calculator</h1>
+    <input type="number" id="num1" placeholder="Enter first number"><br>
+    <input type="number" id="num2" placeholder="Enter second number"><br>
+
+    <select id="operation">
+        <option value="add">➕ Add</option>
+        <option value="subtract">➖ Subtract</option>
+        <option value="multiply">✖ Multiply</option>
+        <option value="divide">➗ Divide</option>
+    </select><br>
+
+    <button onclick="calculate()">Calculate</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    // Function declarations
+    function add(a, b) {
+        return a + b;
+    }
+
+    function subtract(a, b) {
+        return a - b;
+    }
+
+    function multiply(a, b) {
+        return a * b;
+    }
+
+    function divide(a, b) {
+        if (b === 0) return " Cannot divide by zero";
+        return a / b;
+    }
+
+    // Main function to handle calculation
+    function calculate() {
+        const a = parseFloat(document.getElementById("num1").value);
+        const b = parseFloat(document.getElementById("num2").value);
+        const op = document.getElementById("operation").value;
+
+        let result;
+
+        if (isNaN(a) || isNaN(b)) {
+            result = "⚠ Please enter valid numbers!";
+        } else {
+            switch (op) {
+                case "add": result = add(a, b); break;
+                case "subtract": result = subtract(a, b); break;
+                case "multiply": result = multiply(a, b); break;
+                case "divide": result = divide(a, b); break;
+            }
+        }
+
+        document.getElementById("result").innerText = "Result: " + result;
+    }
+</script>
+
+</body>
+</html>

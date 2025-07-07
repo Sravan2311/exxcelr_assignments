@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile Card with Upload</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .card {
+      position: relative;
+      width: 320px;
+      height: 440px;
+      background-color: white;
+      border: 2px solid #4CAF50;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    .card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid #4CAF50;
+      margin-bottom: 10px;
+      object-fit: cover;
+    }
+
+    .card h2 {
+      margin: 10px 0;
+      color: #333;
+    }
+
+    .card p {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 50px;
+    }
+
+    .follow-btn {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .follow-btn:hover {
+      background-color: #45a049;
+    }
+
+    .upload-input {
+      margin-top: 10px;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .custom-upload {
+      display: inline-block;
+      margin-bottom: 15px;
+      color: #4CAF50;
+      cursor: pointer;
+      text-decoration: underline;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <input type="file" id="fileUpload" accept="image/*">
+    <img id="profileImage" src="C:\Users\Sai Sravan Raj\OneDrive\Pictures\Screenshots\insta pic 2.jpg" alt="Profile">
+    <h2>Sai Sravan Raj</h2>
+    <p>Web Developer | Tech Enthusiast | Passionate about UI/UX design and clean code.</p>
+    <button class="follow-btn">Follow</button>
+  </div>
+</body>
+</html>

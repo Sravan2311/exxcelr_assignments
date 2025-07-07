@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  
+  <header>
+    <div class="container">
+      <img src="C:/Users/Sai Sravan Raj/OneDrive/Pictures/Screenshots/insta pic 2.jpg" class="profile-photo" />
+      <div class="name">M. Sai Sravan Raj
+      <p>Web Developer | Designer | Student</p>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <div class="container">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#video">Video</a>
+      <a href="#canvas">Canvas</a>
+      <a href="#contact">Contact</a>
+      <a href="#followMe">Follow Me</a>
+    </div>
+  </nav>
+
+  <main>
+    <center>
+      <audio controls loop autoplay>
+        <source src="C:/Users/Sai Sravan Raj/Music/[iSongs.info] 09 - Why This Kolaveri Di.mp3" type="audio/mp3" />
+      </audio>
+    </center>
+    <section id="home" class="container">
+      <h2>Welcome to My Portfolio</h2>
+      <p>This is a showcase of my work and skills as a web developer.</p>
+    </section>
+    <section id="about" class="container">
+      <h2>About Me</h2>
+      <p>I am a passionate web developer with experience in HTML, CSS, and JavaScript. I love building clean and responsive web interfaces.</p>
+    </section>
+
+    <section id="skills" class="container">
+      <h2>Skills</h2>
+      <ul>
+        <li>HTML5 & CSS3</li>
+        <li>JavaScript</li>
+        <li>Python</li>
+        <li>Bootstrap</li>
+        <li>MongoDB</li>
+      </ul>
+    </section>
+
+    <section id="projects" class="container">
+      <h2>Projects</h2>
+      <div class="project">
+        <h3><a href="https://github.com/Sravan2311/library-management-system">Library Management System</a></h3>
+        <p>A web app to manage books and users with MongoDB and Flask.</p>
+      </div>
+      <div class="project">
+        <h3><a href="https://github.com/Sravan2311/face">Gender-and-Age-Detection-master</a></h3>
+        <p>Real-time gender and age detection using deep learning.</p>
+      </div>
+    </section>
+
+    <section id="video" class="container">
+      <h2>My Video</h2>
+      <video controls width="100%" height="auto">
+        <source src="C:\Users\Sai Sravan Raj\Videos\Screen Recordings\Screen Recording 2024-08-19 195219.mp4" type="video/mp4" />
+      </video>
+    </section>
+
+    <section id="canvas" class="container">
+      <h2>Canvas Drawing</h2>
+      <canvas id="myCanvas" width="400" height="200" style="border:1px solid #333; background:#fafafa;"></canvas>
+    </section>
+
+    <section id="contact" class="container">
+      <h2>Contact</h2>
+      <form id="contactForm">
+        <p>Email:</p>
+        <input type="email" placeholder="Enter your email" name="email" />
+        <p>Available:</p>
+        <input type="date" name="date" />
+        <p>Interest:</p>
+        <input type="range" min="1" max="10" value="5" name="interest" /><br>
+        <input type="submit" value="submit"/>
+      </form>
+    </section>
+    <aside id="followMe" class="container">
+      <h2>Follow Me</h2>
+      <ul>
+        <li><a href="https://github.com/Sravan2311">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/sai-sravan-raj">LinkedIn</a></li>
+        <li><a href="https://twitter.com/Sravan2311">Twitter</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 Sai Sravan Raj. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Canvas drawing
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#2e3192';
+    ctx.fillRect(30, 40, 120, 60);
+    ctx.beginPath();
+    ctx.arc(250, 100, 40, 0, 2 * Math.PI);
+    ctx.fillStyle = '#e63946';
+    ctx.fill();
+    ctx.font = "20px Arial";
+    ctx.fillStyle = "#333";
+    ctx.fillText("Welcome!", 150, 40);
+
+    // Clear form on submit
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      this.reset();
+    });
+  </script>
+</body>
+</html>

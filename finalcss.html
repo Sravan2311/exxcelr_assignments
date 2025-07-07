@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>M. Sai Sravan Raj - Portfolio</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(120deg, #f4f4f4 60%, #e6ecf5 100%);
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #2e3192;
+      color: #fff;
+      padding: 40px 0 20px 0;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(46,49,146,0.08);
+    }
+    .profile-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #fff;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+      margin-bottom: 15px;
+      transition: transform 0.2s;
+    }
+    .profile-photo:hover {
+      transform: scale(1.05) rotate(-2deg);
+    }
+    nav {
+      background: #005599;
+      padding: 14px 0;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,51,102,0.04);
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 22px;
+      font-weight: 600;
+      font-size: 1.08em;
+      letter-spacing: 0.5px;
+      transition: color 0.2s, border-bottom 0.2s;
+      padding-bottom: 2px;
+    }
+    nav a:hover, nav a.active {
+      color: #ffd700;
+      border-bottom: 2px solid #ffd700;
+    }
+    .container {
+      max-width: 980px;
+      margin: 30px auto;
+      padding: 28px 24px;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 16px rgba(0,51,102,0.06);
+    }
+    section {
+      margin-bottom: 48px;
+    }
+    h2 {
+      color: #2e3192;
+      margin-bottom: 14px;
+      font-size: 2em;
+      letter-spacing: 1px;
+    }
+    ul {
+      list-style: disc inside;
+      padding-left: 0;
+      margin-bottom: 10px;
+    }
+    .project {
+      background: #f7faff;
+      padding: 18px;
+      margin-top: 14px;
+      border-left: 5px solid #005599;
+      border-radius: 8px;
+      box-shadow: 0 1px 8px rgba(0,51,102,0.07);
+      transition: box-shadow 0.2s;
+    }
+    .project:hover {
+      box-shadow: 0 4px 18px rgba(0,51,102,0.13);
+    }
+    #video video {
+      border-radius: 12px;
+      box-shadow: 0 0 18px rgba(0,0,0,0.18);
+      margin-top: 14px;
+      width: 100%;
+      max-width: 600px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #canvas-section {
+      margin-bottom: 48px;
+    }
+    #myCanvas {
+      border:1px solid #333;
+      background:#fafafa;
+      display: block;
+      margin: 0 auto;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+    aside {
+      background: #e6f7fa;
+      border-radius: 10px;
+      padding: 18px 24px;
+      margin: 30px auto 0 auto;
+      max-width: 980px;
+      box-shadow: 0 2px 8px rgba(0,51,102,0.06);
+    }
+    aside h2 {
+      color: #005599;
+      margin-bottom: 10px;
+    }
+    aside ul {
+      margin-bottom: 0;
+    }
+    footer {
+      background: linear-gradient(90deg, #eee 60%, #dbe6f6 100%);
+      text-align: center;
+      padding: 24px 0;
+      margin-top: 50px;
+      font-size: 1.1em;
+      color: #2e3192;
+      letter-spacing: 0.5px;
+      border-top: 2px solid #005599;
+    }
+    /* Responsive */
+    @media (max-width: 700px) {
+      .container, aside {
+        padding: 10px;
+      }
+      h2 {
+        font-size: 1.3em;
+      }
+      nav a {
+        margin: 0 8px;
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="C:/Users/Sai Sravan Raj/OneDrive/Pictures/Screenshots/insta pic 2.jpg" class="profile-photo" alt="Sai Sravan Raj" />
+    <h1>M. Sai Sravan Raj</h1>
+    <p>Web Developer | Designer | Student</p>
+  </header>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#video">Video</a>
+    <a href="#canvas-section">Canvas</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <main>
+    <section id="about" class="container">
+      <h2>About Me</h2>
+      <p>I am a passionate web developer with experience in HTML, CSS, and JavaScript. I love building clean and responsive web interfaces.</p>
+    </section>
+
+    <section id="skills" class="container">
+      <h2>Skills</h2>
+      <ul>
+        <li>HTML5 &amp; CSS3</li>
+        <li>JavaScript</li>
+        <li>Python</li>
+        <li>Bootstrap</li>
+        <li>MongoDB</li>
+      </ul>
+    </section>
+
+    <section id="projects" class="container">
+      <h2>Projects</h2>
+      <div class="project">
+        <h3><a href="https://github.com/Sravan2311/library-management-system" target="_blank">Library Management System</a></h3>
+        <p>A web app to manage books and users with MongoDB and Flask.</p>
+      </div>
+      <div class="project">
+        <h3><a href="https://github.com/Sravan2311/face" target="_blank">Gender-and-Age-Detection-master</a></h3>
+        <p>Real-time gender and age detection using deep learning.</p>
+      </div>
+    </section>
+
+    <section id="video" class="container">
+      <h2>My Video</h2>
+      <video controls width="100%" height="auto">
+        <source src="C:\Users\Sai Sravan Raj\Videos\Screen Recordings\Screen Recording 2024-08-19 195219.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </section>
+
+    <section id="canvas-section" class="container">
+      <h2>Canvas Drawing</h2>
+      <canvas id="myCanvas" width="400" height="200"></canvas>
+    </section>
+
+    <section id="contact" class="container">
+      <h2>Contact</h2>
+      <form id="contactForm">
+        <p>Email:</p>
+        <input type="email" placeholder="Enter your email" name="email" required />
+        <p>Available:</p>
+        <input type="date" name="date" />
+        <p>Interest:</p>
+        <input type="range" min="1" max="10" value="5" name="interest" /><br>
+        <input type="submit" value="Submit"/>
+      </form>
+    </section>
+  </main>
+  <aside>
+    <h2>Follow Me</h2>
+    <ul>
+      <li><a href="https://github.com/Sravan2311" target="_blank">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/sai-sravan-raj" target="_blank">LinkedIn</a></li>
+      <li><a href="https://twitter.com/Sravan2311" target="_blank">Twitter</a></li>
+    </ul>
+  </aside>
+  <footer>
+    © 2025 Sai Sravan Raj. All rights reserved.
+  </footer>
+  <script>
+    // Canvas drawing
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#2e3192';
+    ctx.fillRect(30, 40, 120, 60);
+    ctx.beginPath();
+    ctx.arc(250, 100, 40, 0, 2 * Math.PI);
+    ctx.fillStyle = '#e63946';
+    ctx.fill();
+    ctx.font = "20px Arial";
+    ctx.fillStyle = "#333";
+    ctx.fillText("Welcome!", 150, 40);
+
+    // Clear form on submit
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      this.reset();
+    });
+  </script>
+</body>
+</html>

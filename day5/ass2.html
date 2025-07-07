@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upload Profile Photo</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a1c4fd);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+      width: 340px;
+      text-align: center;
+      overflow: hidden;
+      transition: 0.4s ease;
+      padding: 20px;
+    }
+
+    #uploadLabel {
+      cursor: pointer;
+      display: block;
+    }
+
+    #profileImage {
+      width: 100%;
+      height: auto;
+      max-height: 360px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 111, 145, 0.4);
+      transition: transform 0.3s ease;
+    }
+
+    #profileImage:hover {
+      transform: scale(1.02);
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .info {
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.5s ease;
+    }
+
+    .card.show .info {
+      opacity: 1;
+      max-height: 500px;
+      margin-top: 20px;
+    }
+
+    .info h2 {
+      margin: 10px 0 5px;
+      color: #ff6f91;
+    }
+
+    .info p {
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .social-icons a {
+      background: #333;
+      color: #fff;
+      width: 42px;
+      height: 42px;
+      line-height: 42px;
+      text-align: center;
+      border-radius: 50%;
+      font-size: 18px;
+      transition: transform 0.3s, background 0.3s;
+      text-decoration: none;
+    }
+
+    .social-icons a:hover {
+      background: #ff4081;
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="profileCard">
+    <label for="upload" id="uploadLabel">
+      <img id="profileImage" src="https://via.placeholder.com/340x240.png?text=Upload+Photo" alt="Upload Profile">
+    </label>
+    <input type="file" id="upload" accept="image/*" onchange="showImage(event)">
+    
+    <div class="info" id="infoSection">
+      <h2>M. Sai Sravan Raj</h2>
+      <p>Web Developer & Designer</p>
+      <div class="social-icons">
+        <a href="https://www.google.com">G</a>
+        <a href="https://github.com/">GHub</a>
+        <a href="https://www.linkedin.com/feed/">Lkdn</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showImage(event) {
+      const image = document.getElementById('profileImage');
+      image.src = URL.createObjectURL(event.target.files[0]);
+
+      const card = document.getElementById('profileCard');
+      card.classList.add('show'); // reveal text
+    }
+  </script>
+
+</body>
+</html>
