@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product List Manager</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      flex: 1;
+      padding: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 10px;
+      background: #e9e9e9;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .actions button {
+      margin-left: 5px;
+      background-color: #28a745;
+    }
+
+    .actions button:last-child {
+      background-color: #dc3545;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Product List Manager</h1>
+    
+    <form id="product-form">
+      <input type="text" id="name" placeholder="Product Name" required>
+      <input type="number" id="price" placeholder="Price" required>
+      <button type="submit">Add Product</button>
+    </form>
+
+    <ul id="product-list"></ul>
+  </div>
+
+  <script>
+    const form = document.getElementById('product-form');
+    const nameInput = document.getElementById('name');
+    const priceInput = document.getElementById('price');
+    const productList = document.getElementById('product-list');
+
+    let products = [];
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = nameInput.value.trim();
+      const price = parseFloat(priceInput.value);
+
+      if (name && !isNaN(price)) {
+        products.push({ name, price });
+        renderProducts();
+        form.reset();
+      }
+    });
+
+    function renderProducts() {
+      productList.innerHTML = '';
+
+      products.forEach((product, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          ${product.name} - $${product.price.toFixed(2)}
+          <div class="actions">
+            <button onclick="editProduct(${index})">Edit</button>
+            <button onclick="deleteProduct(${index})">Delete</button>
+          </div>
+        `;
+        productList.appendChild(li);
+      });
+    }
+
+    function editProduct(index) {
+      const product = products[index];
+      nameInput.value = product.name;
+      priceInput.value = product.price;
+      products.splice(index, 1);
+      renderProducts();
+    }
+
+    function deleteProduct(index) {
+      products.splice(index, 1);
+      renderProducts();
+    }
+  </script>
+</body>
+</html>
