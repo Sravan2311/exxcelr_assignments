@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Feedback Collector</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #fceabb, #f8b500);
+      margin: 0;
+      padding: 40px;
+    }
+    
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    
+    .feedback-form {
+      max-width: 500px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    
+    .feedback-form label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    
+    .feedback-form input,
+    .feedback-form textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    
+    .feedback-form button {
+      margin-top: 15px;
+      background-color: #f8b500;
+      border: none;
+      padding: 10px 20px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    
+    .feedback-form button:hover {
+      background-color: #d99a00;
+    }
+    
+    .error {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+    
+    .feedback-list {
+      max-width: 700px;
+      margin: 30px auto;
+    }
+    
+    .feedback-card {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    
+    .feedback-card h3 {
+      margin: 0;
+      color: #333;
+    }
+    
+    .feedback-card p {
+      margin: 5px 0;
+      color: #555;
+    }
+    
+    .delete-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: red;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 0.8em;
+    }
+    
+    .delete-btn:hover {
+      background: darkred;
+    }
+  </style>
+</head>
+<body>
+  <h1>Customer Feedback Collector</h1>
+  
+  <form class="feedback-form" id="feedbackForm">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" />
+    <div class="error" id="nameError"></div>
+    
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" />
+    <div class="error" id="emailError"></div>
+    
+    <label for="message">Feedback</label>
+    <textarea id="message" name="message" rows="4"></textarea>
+    <div class="error" id="messageError"></div>
+    
+    <button type="submit">Submit Feedback</button>
+  </form>
+  
+  <div class="feedback-list" id="feedbackList"></div>
+
+  <script>
+    const form = document.getElementById('feedbackForm');
+    const feedbackList = document.getElementById('feedbackList');
+    
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
+    
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+    const messageError = document.getElementById('messageError');
+    
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Reset error messages
+      nameError.textContent = '';
+      emailError.textContent = '';
+      messageError.textContent = '';
+      
+      let hasError = false;
+      
+      if (nameInput.value.trim() === '') {
+        nameError.textContent = 'Name is required.';
+        hasError = true;
+      }
+      
+      if (emailInput.value.trim() === '') {
+        emailError.textContent = 'Email is required.';
+        hasError = true;
+      }
+      
+      if (messageInput.value.trim() === '') {
+        messageError.textContent = 'Feedback message is required.';
+        hasError = true;
+      }
+      
+      if (!hasError) {
+        const feedbackCard = document.createElement('div');
+        feedbackCard.className = 'feedback-card';
+        
+        const nameEl = document.createElement('h3');
+        nameEl.textContent = nameInput.value;
+        
+        const emailEl = document.createElement('p');
+        emailEl.textContent = `Email: ${emailInput.value}`;
+        
+        const messageEl = document.createElement('p');
+        messageEl.textContent = messageInput.value;
+        
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'delete-btn';
+        deleteBtn.textContent = 'Delete';
+        
+        deleteBtn.addEventListener('click', () => {
+          feedbackCard.remove();
+        });
+        
+        feedbackCard.appendChild(nameEl);
+        feedbackCard.appendChild(emailEl);
+        feedbackCard.appendChild(messageEl);
+        feedbackCard.appendChild(deleteBtn);
+        
+        feedbackList.appendChild(feedbackCard);
+        
+        // Clear inputs
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>

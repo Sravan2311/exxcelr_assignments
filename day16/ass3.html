@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>📇 Team Contact Form</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #fddb92, #d1fdff);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      background: linear-gradient(to right, #fc5c7d, #6a82fb);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: auto;
+      background: #ffffffcc;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 2px solid #b2ebf2;
+    }
+
+    button {
+      background: linear-gradient(to right, #36d1dc, #5b86e5);
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #ff416c, #ff4b2b);
+    }
+
+    .output {
+      margin-top: 20px;
+      background: #f1f8e9;
+      padding: 20px;
+      border-left: 5px solid #66bb6a;
+      border-radius: 10px;
+      color: #33691e;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>👥 Team Contact Form</h1>
+
+  <div class="form-container">
+    <input type="text" id="name" placeholder="Enter Name" />
+    <input type="email" id="email" placeholder="Enter Email" />
+    <input type="tel" id="phone" placeholder="Enter Phone Number" />
+    <button onclick="submitForm()">📩 Submit</button>
+
+    <div id="result" class="output" style="display:none;"></div>
+  </div>
+
+  <script>
+    const handleFormSubmission = ({
+      name = "Anonymous",
+      email = "No email provided",
+      phone = "No phone"
+    }) => {
+      return `👤 Name: ${name}\n📧 Email: ${email}\n📱 Phone: ${phone}`;
+    };
+
+    const submitForm = () => {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+
+      const userData = { name, email, phone };
+      const result = handleFormSubmission(userData);
+
+      const resultDiv = document.getElementById("result");
+      resultDiv.style.display = "block";
+      resultDiv.textContent = result;
+    };
+  </script>
+</body>
+</html>

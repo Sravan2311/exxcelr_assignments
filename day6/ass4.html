@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Age Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f0f8ff;
+        }
+        h1 {
+            color: #333;
+        }
+        input {
+            margin: 10px;
+            padding: 5px;
+            width: 200px;
+        }
+        button {
+            padding: 5px 10px;
+            background-color: #257ac5;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1a5f9b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Age Calculator</h1>
+
+    <script>
+        // Ask the user their birth year
+        let birthYear = Number(prompt("Enter your birth year:"));
+
+        // Set the current year
+        let currentYear = 2025;
+
+        // Calculate age
+        let age = currentYear - birthYear;
+
+        // Display the result
+        alert("You born on " + age );
+        document.write("Age: " + age);
+    </script>
+</body>
+</html>

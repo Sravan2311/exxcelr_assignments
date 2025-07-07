@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🏍 Vehicle Inheritance Example</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #f8f9fa, #e3f2fd);
+      font-family: 'Segoe UI', sans-serif;
+      padding: 40px;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      background: linear-gradient(to right, #ff416c, #ff4b2b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .card {
+      max-width: 500px;
+      margin: 30px auto;
+      background: linear-gradient(to right, #ffffff, #f1f8e9);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    .info {
+      font-size: 1.2rem;
+      margin: 10px 0;
+      color: #333;
+    }
+
+    .label {
+      font-weight: bold;
+      color: #1976d2;
+    }
+
+    .value {
+      color: #388e3c;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Vehicle Inheritance</h1>
+
+  <div class="card" id="output"></div>
+
+  <script>
+    class Vehicle {
+      constructor(brand, model) {
+        this.brand = brand;
+        this.model = model;
+      }
+
+      showInfo() {
+        return `Brand: ${this.brand}, Model: ${this.model}`;
+      }
+    }
+
+    class Bike extends Vehicle {
+      constructor(brand, model, engine) {
+        super(brand, model);
+        this.engine = engine;
+      }
+
+      engineType() {
+        return this.engine;
+      }
+    }
+
+    const myBike = new Bike("Yamaha", "FZ", "150cc");
+
+    const output = document.getElementById("output");
+``
+    output.innerHTML = `
+      <div class="info"><span class="label">🚘 Brand:</span> <span class="value">${myBike.brand}</span></div>
+      <div class="info"><span class="label">📦 Model:</span> <span class="value">${myBike.model}</span></div>
+      <div class="info"><span class="label">⚙ Engine Type:</span> <span class="value">${myBike.engineType()}</span></div>
+      <div class="info"><span class="label">ℹ Info:</span> <span class="value">${myBike.showInfo()}</span></div>
+    `;
+  </script>
+
+</body>
+</html>

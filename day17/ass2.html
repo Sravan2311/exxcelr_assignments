@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>📝 Feedback Form</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #fceabb, #f8b500);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      background: linear-gradient(to right, #36d1dc, #5b86e5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #ffffffee;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      border: 2px solid #ffcc80;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 12px 25px;
+      background: linear-gradient(to right, #00c9ff, #92fe9d);
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      color: #004d40;
+      cursor: pointer;
+      font-weight: bold;
+      display: block;
+      margin: auto;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #fc6076, #ff9a44);
+      color: white;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .success {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+      border-left: 5px solid #66bb6a;
+    }
+
+    .error {
+      background-color: #ffebee;
+      color: #c62828;
+      border-left: 5px solid #ef5350;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📝 Submit Your Feedback</h1>
+
+  <div class="container">
+    <form id="feedbackForm">
+      <input type="text" id="name" placeholder="Your Name" required />
+      <input type="email" id="email" placeholder="Your Email" required />
+      <textarea id="feedback" rows="5" placeholder="Your Feedback..." required></textarea>
+      <button type="submit">📩 Submit Feedback</button>
+    </form>
+
+    <div id="responseMessage" class="message" style="display: none;"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("feedbackForm");
+    const responseMessage = document.getElementById("responseMessage");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const feedback = document.getElementById("feedback").value.trim();
+
+      const data = { name, email, feedback };
+
+      try {
+        const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (!res.ok) throw new Error(`Status: ${res.status}`);
+
+        const result = await res.json();
+
+        responseMessage.innerText = `✅ Feedback submitted successfully! Your response ID is: ${result.id}`;
+        responseMessage.className = "message success";
+        responseMessage.style.display = "block";
+
+        form.reset();
+      } catch (err) {
+        responseMessage.innerText = `❌ Submission failed: ${err.message}`;
+        responseMessage.className = "message error";
+        responseMessage.style.display = "block";
+      }
+    });
+  </script>
+
+</body>
+</html>

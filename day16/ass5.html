@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🧮 Flexible 2-Value Calculator</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #f6d365, #fda085);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #fff9f1;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    .input-area {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    select, input, button {
+      flex: 1;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 16px;
+      border: 2px solid #ffe0b2;
+    }
+
+    button {
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+    }
+
+    .result {
+      font-size: 20px;
+      background: #e0f7fa;
+      padding: 15px;
+      border-left: 6px solid #00acc1;
+      border-radius: 10px;
+      color: #004d40;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🧮 Flexible Calculator</h1>
+
+  <div class="container">
+    <!-- 🔢 Input Area for Two Numbers Only -->
+    <div class="input-area">
+      <select id="operation">
+        <option value="add">Add ➕</option>
+        <option value="subtract">Subtract ➖</option>
+        <option value="multiply">Multiply ✖</option>
+        <option value="divide">Divide ➗</option>
+      </select>
+      <input type="number" id="num1" placeholder="Enter first number" />
+      <input type="number" id="num2" placeholder="Enter second number" />
+      <button onclick="handleCalculate()">Calculate</button>
+    </div>
+
+    <!-- 🧾 Output Result -->
+    <div id="output" class="result" style="display: none;"></div>
+  </div>
+
+  <script>
+    const calculate = (operation = "add", ...numbers) => {
+      let result;
+
+      switch (operation) {
+        case "add":
+          result = numbers[0] + numbers[1];
+          break;
+        case "subtract":
+          result = numbers[0] - numbers[1];
+          break;
+        case "multiply":
+          result = numbers[0] * numbers[1];
+          break;
+        case "divide":
+          result = numbers[0] / numbers[1];
+          break;
+        default:
+          result = "Invalid Operation";
+      }
+
+      return `🧮 Operation: ${operation} | Numbers: ${numbers.join(" & ")} | ✅ Result: ${result}`;
+    };
+
+    const handleCalculate = () => {
+      const operation = document.getElementById("operation").value || undefined;
+      const num1 = parseFloat(document.getElementById("num1").value);
+      const num2 = parseFloat(document.getElementById("num2").value);
+
+      if (isNaN(num1) || isNaN(num2)) {
+        alert("❗ Please enter two valid numbers.");
+        return;
+      }
+
+      const resultText = calculate(operation, num1, num2);
+
+      const outputDiv = document.getElementById("output");
+      outputDiv.textContent = resultText;
+      outputDiv.style.display = "block";
+    };
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🛍 Product List Display</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+      font-family: 'Segoe UI', sans-serif;
+      padding: 40px;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      background: linear-gradient(to right, #00c9ff, #92fe9d);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #ffffffdd;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.15);
+    }
+
+    .input-area {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .input-area input {
+      flex: 1;
+      padding: 12px;
+      border-radius: 10px;
+      border: 2px solid #b2dfdb;
+      font-size: 16px;
+    }
+
+    .input-area button {
+      padding: 12px 20px;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .input-area button:hover {
+      background: linear-gradient(to right, #ff416c, #ff4b2b);
+    }
+
+    .product {
+      font-size: 18px;
+      margin: 12px 0;
+      padding: 15px;
+      background: #e0f7fa;
+      border-left: 6px solid #00acc1;
+      border-radius: 10px;
+      color: #006064;
+    }
+
+    .product strong {
+      color: #00796b;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🛍 Product List</h1>
+
+  <div class="container">
+    <!-- 🔽 Input Fields -->
+    <div class="input-area">
+      <input type="text" id="productName" placeholder="Enter Product Name">
+      <input type="number" id="productPrice" placeholder="Enter Product Price (₹)">
+      <button onclick="addProduct()">➕ Add Product</button>
+    </div>
+
+    <!-- 🧾 Product Cards -->
+    <div id="productList"></div>
+  </div>
+
+  <script>
+    const products = [];
+
+    const displayProducts = (items) => {
+      const productList = document.getElementById("productList");
+      productList.innerHTML = ''; // Clear previous
+
+      for (const { name, price } of items) {
+        const div = document.createElement("div");
+        div.className = "product";
+        div.innerHTML = `🛒 <strong>Product:</strong> ${name} | 💰 <strong>Price:</strong> ₹${price}`;
+        productList.appendChild(div);
+      }
+    };
+
+    const addProduct = () => {
+      const name = document.getElementById("productName").value.trim();
+      const price = parseFloat(document.getElementById("productPrice").value);
+
+      if (!name || isNaN(price) || price <= 0) {
+        alert("❗ Please enter a valid product name and price.");
+        return;
+      }
+
+      const product = { name, price };
+      products.push(product);
+
+      displayProducts(products);
+
+      // Clear inputs
+      document.getElementById("productName").value = '';
+      document.getElementById("productPrice").value = '';
+    };
+  </script>
+
+</body>
+</html>

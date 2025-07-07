@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🛒 Product Cart with Constructor</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #fdfbfb, #ebedee);
+      font-family: 'Segoe UI', sans-serif;
+      padding: 40px;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      background: linear-gradient(to right, #ff6a00, #ee0979);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      background: #ffffffcc;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-card {
+      background: linear-gradient(to bottom right, #ffffff, #e1f5fe);
+      padding: 20px;
+      margin: 15px;
+      border-left: 6px solid #039be5;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      flex: 1 1 250px;
+    }
+
+    .product-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    button {
+      background: linear-gradient(to right, #36d1dc, #5b86e5);
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #ff512f, #dd2476);
+    }
+
+    .total {
+      background: #f1f8e9;
+      border-left: 6px solid #8bc34a;
+      padding: 15px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-top: 20px;
+      color: #33691e;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🛒 Product Cart - Buy Items</h1>
+
+  <div class="container" id="output"></div>
+
+  <script>
+    function Product(name, price, quantity) {
+      this.name = name;
+      this.price = price;
+      this.quantity = quantity;
+      this.totalPrice = function () {
+        return this.price * this.quantity;
+      };
+    }
+
+    const cart = [
+      new Product("Smartphone", 20000, 2),
+      new Product("Laptop", 50000, 1),
+      new Product("Headphones", 1500, 3),
+      new Product("Mouse", 600, 4),
+      new Product("Keyboard", 1200, 2),
+      new Product("Smartwatch", 3500, 1),
+      new Product("Charger", 800, 2),
+      new Product("Tablet", 18000, 1),
+    ];
+
+    const selectedProducts = [];
+    const outputDiv = document.getElementById("output");
+
+    function renderProducts() {
+      outputDiv.innerHTML = `<div class="product-row">`;
+
+      cart.forEach((product, index) => {
+        var name = product.name;
+        var price = product.price;
+        var quantity = product.quantity;
+        outputDiv.innerHTML += `
+          <div class="product-card">
+            <h3>🛍 ${name}</h3>
+            <p>💵 Price: ₹${price}</p>
+            <p>🔢 Quantity: ${quantity}</p>
+            <p>🧾 Total: <strong>₹${product.totalPrice()}</strong></p>
+            <button onclick="buyProduct(${index})">🛒 Buy</button>
+          </div>
+        `;
+      });
+
+      outputDiv.innerHTML += `</div>`;
+
+      if (selectedProducts.length === 3) {
+        outputDiv.innerHTML += `
+          <div class="total">
+            <button onclick="showTotalBill()">💰 Show Total Bill</button>
+          </div>
+        `;
+      }
+    }
+
+    function buyProduct(index) {
+      const product = cart[index];
+
+      if (selectedProducts.length >= 3) {
+        alert("🛑 You can only buy 3 products.");
+        return;
+      }
+
+      if (selectedProducts.includes(product)) {
+        alert("⚠ Product already selected.");
+        return;
+      }
+
+      selectedProducts.push(product);
+      alert(`✅ ${product.name} added to your cart.`);
+      renderProducts();
+    }
+
+    function showTotalBill() {
+      const total = selectedProducts.reduce((sum, p) => sum + p.totalPrice(), 0);
+      outputDiv.innerHTML += `
+        <div class="total">🧾 Total Bill for 3 Products: ₹<strong>${total}</strong></div>
+      `;
+    }
+
+    renderProducts();
+  </script>
+
+</body>
+</html>

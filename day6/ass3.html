@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Area of Rectangle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f0f8ff;
+        }
+        h1 {
+            color: #333;
+        }
+        input {
+            margin: 10px;
+            padding: 5px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rectangle Area Calculator</h1>
+
+    <script>
+        // Ask for width and height
+        let width = Number(prompt("Enter width:"));
+        let height = Number(prompt("Enter height:"));
+
+        // Calculate area
+        let area = width * height;
+
+        // Display the result
+        alert("Area of rectangle is: " + area);
+        document.write("Area: " + area);
+    </script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🎓 Student Info Portal</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #74ebd5, #9face6);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      background: linear-gradient(to right, #f7971e, #ffd200);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #ffffffcc;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 14px;
+      border: 1px solid #ccc;
+    }
+
+    th {
+      background: linear-gradient(to right, #36d1dc, #5b86e5);
+      color: white;
+      font-size: 18px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f1f8e9;
+    }
+
+    .error {
+      background: #ffebee;
+      color: #c62828;
+      padding: 15px;
+      text-align: center;
+      border-left: 5px solid #e53935;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    button {
+      padding: 12px 20px;
+      margin: 10px;
+      background: linear-gradient(to right, #00c9ff, #92fe9d);
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      color: #004d40;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #fc6076, #ff9a44);
+      color: white;
+    }
+
+    input {
+      padding: 10px;
+      width: 30%;
+      margin: 5px;
+      border-radius: 10px;
+      border: 2px solid #ffd180;
+      font-size: 16px;
+    }
+
+    .btn-group {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎓 Student Info Portal</h1>
+
+  <div class="container">
+
+    <!-- ✍ User Input Fields -->
+    <div style="text-align: center;">
+      <input type="text" id="name" placeholder="Enter Name">
+      <input type="email" id="email" placeholder="Enter Email">
+      <input type="text" id="city" placeholder="Enter City">
+      <br />
+      <div class="btn-group">
+        <button onclick="submitStudent()">➕ Submit Student</button>
+        <button onclick="displayStudents()">📥 Show Student Details</button>
+        <button onclick="deleteAll()">🗑 Delete All</button>
+      </div>
+    </div>
+
+    <!-- ❗ Error Message -->
+    <div id="error" class="error" style="display: none;"></div>
+
+    <!-- 📊 Student Table -->
+    <table id="studentTable" style="display: none;">
+      <thead>
+        <tr>
+          <th>👤 Name</th>
+          <th>📧 Email</th>
+          <th>🏙 City</th>
+        </tr>
+      </thead>
+      <tbody id="studentBody"></tbody>
+    </table>
+  </div>
+
+  <script>
+    let localStudents = [];
+
+    const submitStudent = () => {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const city = document.getElementById("city").value.trim();
+      const errorDiv = document.getElementById("error");
+
+      if (!name || !email || !city) {
+        errorDiv.innerText = "❗ All fields are required.";
+        errorDiv.style.display = "block";
+        return;
+      }
+
+      errorDiv.style.display = "none";
+
+      localStudents.push({ name, email, city });
+
+      // Clear inputs
+      document.getElementById("name").value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("city").value = "";
+
+      alert("✅ Student added! Click 'Show Student Details' to view.");
+    };
+
+    const displayStudents = () => {
+      const tbody = document.getElementById("studentBody");
+      const table = document.getElementById("studentTable");
+
+      tbody.innerHTML = "";
+
+      if (localStudents.length === 0) {
+        alert("⚠ No student data to display.");
+        return;
+      }
+
+      for (let student of localStudents) {
+        const row = `
+          <tr>
+            <td>${student.name}</td>
+            <td>${student.email}</td>
+            <td>${student.city}</td>
+          </tr>`;
+        tbody.innerHTML += row;
+      }
+
+      table.style.display = "table";
+    };
+
+    const deleteAll = () => {
+      localStudents = [];
+      document.getElementById("studentBody").innerHTML = "";
+      document.getElementById("studentTable").style.display = "none";
+      document.getElementById("error").style.display = "none";
+      alert("🗑 All student entries cleared!");
+    };
+  </script>
+
+</body>
+</html>

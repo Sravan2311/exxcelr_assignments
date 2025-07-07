@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>📊 Student Report Generator</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #e0f7fa, #fffde7);
+      font-family: 'Segoe UI', sans-serif;
+      padding: 40px;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      background: linear-gradient(to right, #8e2de2, #4a00e0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .form-card, .card {
+      max-width: 600px;
+      margin: 30px auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      border: 2px solid #b2dfdb;
+      border-radius: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(to right, #00b09b, #96c93d);
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #ff512f, #dd2476);
+    }
+
+    .info {
+      font-size: 1.1rem;
+      margin: 12px 0;
+      color: #333;
+    }
+
+    .label {
+      font-weight: bold;
+      color: #00796b;
+    }
+
+    .value {
+      color: #2e7d32;
+    }
+
+    .grade {
+      font-size: 1.3rem;
+      color: #ff5722;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📚 Student Report Generator</h1>
+
+  <!-- Input Form -->
+  <div class="form-card">
+    <input type="text" id="name" placeholder="Enter Student Name" />
+    <input type="text" id="rollno" placeholder="Enter Roll Number" />
+    <input type="number" id="maths" placeholder="Marks in Maths" />
+    <input type="number" id="english" placeholder="Marks in English" />
+    <input type="number" id="science" placeholder="Marks in Science" />
+    <button onclick="generateReport()">Generate Report</button>
+  </div>
+
+  <!-- Report Card Output -->
+  <div class="card" id="report"></div>
+
+  <script>
+    // Constructor function
+    function Student(name, rollno, marks) {
+      this.name = name;
+      this.rollno = rollno;
+      this.marks = marks;
+
+      this.getAverage = function () {
+        const scores = Object.values(this.marks);
+        const total = scores.reduce((sum, mark) => sum + mark, 0);
+        return (total / scores.length).toFixed(2);
+      };
+
+      this.getGrade = function () {
+        const avg = this.getAverage();
+        if (avg >= 90) return "A";
+        else if (avg >= 75) return "B";
+        else return "C";
+      };
+    }
+
+    // Main function to collect values and show report
+    function generateReport() {
+      const name = document.getElementById("name").value.trim();
+      const rollno = document.getElementById("rollno").value.trim();
+      const maths = parseFloat(document.getElementById("maths").value);
+      const english = parseFloat(document.getElementById("english").value);
+      const science = parseFloat(document.getElementById("science").value);
+
+      if (!name || !rollno || isNaN(maths) || isNaN(english) || isNaN(science)) {
+        alert("❌ Please enter all fields correctly.");
+        return;
+      }
+
+      const student = new Student(name, rollno, {
+        maths: maths,
+        english: english,
+        science: science
+      });
+
+      const report = document.getElementById("report");
+      report.innerHTML = `
+        <div class="info"><span class="label">👨‍🎓 Name:</span> <span class="value">${student.name}</span></div>
+        <div class="info"><span class="label">🆔 Roll No:</span> <span class="value">${student.rollno}</span></div>
+        <div class="info"><span class="label">📊 Average Marks:</span> <span class="value">${student.getAverage()}</span></div>
+        <div class="info"><span class="label">🎖 Grade:</span> <span class="grade">${student.getGrade()}</span></div>
+      `;
+    }
+  </script>
+
+</body>
+</html>

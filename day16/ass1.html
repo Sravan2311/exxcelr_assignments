@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🎓 Student Grading System</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      font-family: 'Segoe UI', sans-serif;
+      padding: 40px;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      background: linear-gradient(to right, #00b09b, #96c93d);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #ffffffdd;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    }
+
+    .input-area {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .input-area input {
+      flex: 1;
+      padding: 12px;
+      border-radius: 10px;
+      border: 2px solid #b2dfdb;
+      font-size: 16px;
+    }
+
+    .input-area button {
+      padding: 12px 20px;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .input-area button:hover {
+      background: linear-gradient(to right, #ff416c, #ff4b2b);
+    }
+
+    .result {
+      font-size: 18px;
+      margin: 12px 0;
+      padding: 15px;
+      border-left: 6px solid #90caf9;
+      background: #f1f8ff;
+      border-radius: 10px;
+    }
+
+    .pass {
+      border-left-color: #66bb6a;
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .fail {
+      border-left-color: #ef5350;
+      background: #ffebee;
+      color: #c62828;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📊 Student Grading Result</h1>
+
+  <div class="container">
+    <!-- 🧾 Input Fields -->
+    <div class="input-area">
+      <input type="text" id="nameInput" placeholder="Enter Student Name" />
+      <input type="number" id="scoreInput" placeholder="Enter Score" />
+      <button onclick="addStudent()">➕ Add Student</button>
+    </div>
+
+    <!-- 🎯 Output Result -->
+    <div id="output"></div>
+  </div>
+
+  <script>
+    const outputDiv = document.getElementById("output");
+
+    const displayResult = ({ name, score }) => {
+      const result = score >= 50 ? "Pass" : "Fail";
+      const resultClass = score >= 50 ? "pass" : "fail";
+
+      const resultDiv = document.createElement("div");
+      resultDiv.className = `result ${resultClass}`;
+      resultDiv.textContent = `${name} scored ${score} - ${result}`;
+      outputDiv.appendChild(resultDiv);
+    };
+
+    const addStudent = () => {
+      const nameInput = document.getElementById("nameInput");
+      const scoreInput = document.getElementById("scoreInput");
+
+      const name = nameInput.value.trim();
+      const score = parseInt(scoreInput.value);
+
+      if (!name || isNaN(score)) {
+        alert("❗ Please enter both name and a valid score.");
+        return;
+      }
+
+      const student = { name, score };
+      displayResult(student);
+
+      // Clear inputs
+      nameInput.value = "";
+      scoreInput.value = "";
+    };
+  </script>
+
+</body>
+</html>

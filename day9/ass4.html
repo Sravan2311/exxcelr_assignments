@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🛒 Online Store Product Manager</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #fceabb, #f8b500);
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 30px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.8rem;
+      background: linear-gradient(to right, #fc466b, #3f5efb);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+    }
+
+    .container { 
+      background-color: #ffffffee;
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    .subtitle {
+      font-size: 1.3em;
+      margin-bottom: 20px;
+      color: #37474f;
+    }
+
+    button {
+      background: linear-gradient(to right, #00b09b, #96c93d);
+      color: #fff;
+      padding: 12px 20px;
+      margin: 10px 10px 10px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #f12711, #f5af19);
+      transform: scale(1.05);
+    }
+
+    .product-button {
+      background: linear-gradient(to right, #ff512f, #dd2476);
+      color: white;
+      font-size: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+      width: 100%;
+    }
+
+    .product-button:hover {
+      background: linear-gradient(to right, #00b09b, #96c93d);
+      transform: scale(1.03);
+    }
+
+    .result {
+      background-color: #f1f8e9;
+      padding: 15px;
+      margin-top: 15px;
+      border-left: 6px solid #8bc34a;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    .highlight {
+      color: #1b5e20;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🛍 Online Store - Product Management</h1>
+
+  <div class="container">
+    <h2 class="subtitle">📦 Product Controls</h2>
+    <button onclick="showElectronics()">🔌 Show Electronics</button>
+    <button onclick="showInStock()">📦 Show In-Stock</button>
+    <button onclick="applyDiscount()">💸 Apply 10% Discount</button>
+    <button onclick="calculateTotal()">🧮 Total In-Stock Price</button>
+
+    <div id="output"></div>
+  </div>
+
+  <script>
+    let products = [
+      { name: "Smartphone", category: "Electronics", price: 20000, stock: 10 },
+      { name: "T-Shirt", category: "Clothing", price: 800, stock: 0 },
+      { name: "Laptop", category: "Electronics", price: 50000, stock: 5 },
+      { name: "Headphones", category: "Electronics", price: 2500, stock: 12 },
+      { name: "Shoes", category: "Footwear", price: 3000, stock: 3 }
+    ];
+
+    function showElectronics() {
+      const electronics = products.filter(p => p.category === "Electronics");
+      displayProducts("🔌 Electronics Products", electronics);
+    }
+
+    function showInStock() {
+      const inStock = products.filter(p => p.stock > 0);
+      displayProducts("📦 Products In Stock", inStock);
+    }
+
+    function applyDiscount() {
+      products = products.map(p => ({
+        ...p,
+        price: Math.round(p.price * 0.90)
+      }));
+      displayProducts("💸 10% Discount Applied to All Products", products);
+    }
+
+    function calculateTotal() {
+      const inStock = products.filter(p => p.stock > 0);
+      const total = inStock.reduce((sum, p) => sum + (p.price * p.stock), 0);
+      document.getElementById("output").innerHTML = `
+        <div class="result">
+          🧮 Total Price of In-Stock Products: <span class="highlight">₹${total}</span>
+        </div>
+      `;
+    }
+
+    function purchaseProduct(productName) {
+      const product = products.find(p => p.name === productName);
+      if (product && product.stock > 0) {
+        product.stock -= 1;
+        document.getElementById("output").innerHTML = `
+          <div class="result">
+            🧾 <strong>Purchase Successful!</strong><br>
+            ✅ You bought <span class="highlight">${product.name}</span><br>
+            💰 Price: ₹<span class="highlight">${product.price}</span><br>
+            📦 Remaining Stock: <span class="highlight">${product.stock}</span>
+          </div>
+        `;
+      } else {
+        document.getElementById("output").innerHTML = `
+          <div class="result">
+            ❌ Sorry! <span class="highlight">${productName}</span> is out of stock.
+          </div>
+        `;
+      }
+    }
+
+    function displayProducts(title, list) {
+      let html = `
+        <div class="result">
+          <h3>${title}</h3>
+          <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+      `;
+      if (list.length === 0) {
+        html += `<p>❌ No products found.</p>`;
+      } else {
+        html += list.map(p => `
+          <div style="
+            flex: 1 1 250px;
+            background: linear-gradient(to bottom right, #ffffff, #e0f7fa);
+            border-radius: 15px;
+            padding: 15px;
+            border: 2px solid #90caf9;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+            text-align: left;
+          ">
+            <h4 style="margin: 0; color: #0277bd;">📦 ${p.name}</h4>
+            <p>🏷 <strong>Category:</strong> ${p.category}</p>
+            <p>💰 <strong>Price:</strong> ₹${p.price}</p>
+            <p>📦 <strong>Stock:</strong> ${p.stock}</p>
+            <button 
+              class="product-button" 
+              onclick="purchaseProduct('${p.name}')"
+            >
+              🛒 Buy Now
+            </button>
+          </div>
+        `).join('');
+      }
+
+      html += `</div></div>`;
+      document.getElementById("output").innerHTML = html;
+    }
+  </script>
+
+</body>

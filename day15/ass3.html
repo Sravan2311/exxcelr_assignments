@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Task Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #83a4d4, #b6fbff);
+      margin: 0;
+      padding: 40px;
+    }
+    
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    
+    .task-form, .filter-section {
+      max-width: 600px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    
+    .task-form label, .filter-section label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    
+    .task-form input,
+    .filter-section input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    
+    .task-form button {
+      margin-top: 15px;
+      background-color: #007BFF;
+      border: none;
+      padding: 10px 20px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    
+    .task-form button:hover {
+      background-color: #0056b3;
+    }
+    
+    .error {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+    
+    .task-list {
+      max-width: 800px;
+      margin: 30px auto;
+    }
+    
+    .task-card {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .task-details {
+      max-width: 70%;
+    }
+    
+    .task-details p {
+      margin: 5px 0;
+      color: #333;
+    }
+    
+    .task-actions button {
+      margin-left: 8px;
+      background: #28a745;
+      border: none;
+      color: #fff;
+      padding: 6px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 0.85em;
+      transition: background 0.3s;
+    }
+    
+    .task-actions button:hover {
+      opacity: 0.8;
+    }
+    
+    .delete-btn {
+      background: red;
+    }
+    
+    .task-done {
+      text-decoration: line-through;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+  <h1>Student Task Tracker</h1>
+  
+  <form class="task-form" id="taskForm">
+    <label for="studentName">Student Name</label>
+    <input type="text" id="studentName" name="studentName" />
+    <div class="error" id="nameError"></div>
+    
+    <label for="task">Task</label>
+    <input type="text" id="task" name="task" />
+    <div class="error" id="taskError"></div>
+    
+    <button type="submit">Add Task</button>
+  </form>
+  
+  <div class="filter-section">
+    <label for="filterInput">Filter by Student Name (optional):</label>
+    <input type="text" id="filterInput" placeholder="Type student name...">
+  </div>
+  
+  <div class="task-list" id="taskList"></div>
+  
+  <script>
+    const taskForm = document.getElementById('taskForm');
+    const taskList = document.getElementById('taskList');
+    
+    const studentNameInput = document.getElementById('studentName');
+    const taskInput = document.getElementById('task');
+    
+    const nameError = document.getElementById('nameError');
+    const taskError = document.getElementById('taskError');
+    
+    const filterInput = document.getElementById('filterInput');
+    
+    let tasks = [];
+    
+    taskForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      nameError.textContent = '';
+      taskError.textContent = '';
+      
+      let hasError = false;
+      
+      if (studentNameInput.value.trim() === '') {
+        nameError.textContent = 'Student name is required.';
+        hasError = true;
+      }
+      
+      if (taskInput.value.trim() === '') {
+        taskError.textContent = 'Task is required.';
+        hasError = true;
+      }
+      
+      if (!hasError) {
+        const taskObj = {
+          id: Date.now(),
+          studentName: studentNameInput.value.trim(),
+          task: taskInput.value.trim(),
+          done: false
+        };
+        
+        tasks.push(taskObj);
+        renderTasks(tasks);
+        taskForm.reset();
+      }
+    });
+    
+    function renderTasks(taskArray) {
+      taskList.innerHTML = '';
+      
+      if (taskArray.length === 0) {
+        taskList.innerHTML = '<p style="text-align:center; color:#333;">No tasks added yet.</p>';
+        return;
+      }
+      
+      taskArray.forEach(taskObj => {
+        const taskCard = document.createElement('div');
+        taskCard.className = 'task-card';
+        
+        const detailsDiv = document.createElement('div');
+        detailsDiv.className = 'task-details';
+        
+        const nameEl = document.createElement('p');
+        nameEl.textContent = `Student: ${taskObj.studentName}`;
+        
+        const taskEl = document.createElement('p');
+        taskEl.textContent = `Task: ${taskObj.task}`;
+        if (taskObj.done) {
+          taskEl.classList.add('task-done');
+        }
+        
+        detailsDiv.appendChild(nameEl);
+        detailsDiv.appendChild(taskEl);
+        
+        const actionsDiv = document.createElement('div');
+        actionsDiv.className = 'task-actions';
+        
+        const doneBtn = document.createElement('button');
+        doneBtn.textContent = taskObj.done ? 'Undo' : 'Done';
+        doneBtn.style.background = taskObj.done ? '#ffc107' : '#28a745';
+        
+        doneBtn.addEventListener('click', () => {
+          taskObj.done = !taskObj.done;
+          renderTasks(filterTasks());
+        });
+        
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.className = 'delete-btn';
+        
+        deleteBtn.addEventListener('click', () => {
+          tasks = tasks.filter(t => t.id !== taskObj.id);
+          renderTasks(filterTasks());
+        });
+        
+        actionsDiv.appendChild(doneBtn);
+        actionsDiv.appendChild(deleteBtn);
+        
+        taskCard.appendChild(detailsDiv);
+        taskCard.appendChild(actionsDiv);
+        
+        taskList.appendChild(taskCard);
+      });
+    }
+    
+    filterInput.addEventListener('input', () => {
+      renderTasks(filterTasks());
+    });
+    
+    function filterTasks() {
+      const filterText = filterInput.value.trim().toLowerCase();
+      if (filterText === '') {
+        return tasks;
+      } else {
+        return tasks.filter(task => 
+          task.studentName.toLowerCase().includes(filterText)
+        );
+      }
+    }
+  </script>
+</body>
+</html>
